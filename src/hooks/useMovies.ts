@@ -1,4 +1,3 @@
-// src/store/useMovieStore.ts
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Movie } from '../types/movie'
@@ -13,7 +12,6 @@ interface MovieStore {
 
 // 2. Kita bikin tas ranselnya (Store)
 export const useMovieStore = create<MovieStore>()(
-  // persist = nyimpen otomatis ke localStorage browser
   persist(
     (set, get) => ({
       favorites: [], // Awalnya tas ransel kosong
