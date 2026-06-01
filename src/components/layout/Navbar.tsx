@@ -1,16 +1,12 @@
-// src/components/layout/Navbar.tsx
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Search, Menu, X, Tv } from 'lucide-react'
 
 export default function Navbar() {
-  // State untuk efek scroll (true jika discroll ke bawah)
   const [isScrolled, setIsScrolled] = useState(false)
   
-  // State untuk buka/tutup menu full-screen
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // Efek untuk mendeteksi scroll
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -20,10 +16,8 @@ export default function Navbar() {
       }
     }
 
-    // Pasang sensor scroll ke browser
     window.addEventListener('scroll', handleScroll)
     
-    // Bersihkan sensor kalau komponen dihapus
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -33,8 +27,8 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 p-4 ${
           isScrolled 
-            ? 'bg-slate-950/90 backdrop-blur-md shadow-lg border-b border-slate-800' // Warna biru gelap transparan saat di-scroll
-            : 'bg-transparent' // Transparan saat di paling atas
+            ? 'bg-slate-950/90 backdrop-blur-md shadow-lg border-b border-slate-800' 
+            : 'bg-transparent' 
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">

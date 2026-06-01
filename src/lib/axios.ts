@@ -1,25 +1,12 @@
-// src/lib/axios.ts
 import axios from 'axios'
-
-// ─────────────────────────────────────────────────────────────
-// Environment variable — read from your .env file
-// Vite exposes env vars via import.meta.env (not process.env!)
-// ─────────────────────────────────────────────────────────────
 
 const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY as string
 
-// Early warning if someone forgets to set up the .env file
 if (!TMDB_API_KEY) {
   console.error(
     '⚠️  VITE_TMDB_API_KEY is missing! Please check your .env file.'
   )
 }
-
-// ─────────────────────────────────────────────────────────────
-// CREATE THE CONFIGURED INSTANCE
-// Think of this like your "pre-configured fetch" — all API calls
-// made with this instance will share these defaults.
-// ─────────────────────────────────────────────────────────────
 
 const apiClient = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
@@ -30,12 +17,6 @@ const apiClient = axios.create({
   },
 })
 
-// ─────────────────────────────────────────────────────────────
-// REQUEST INTERCEPTOR
-// Runs before EVERY request is sent.
-// This automatically appends ?api_key=... to every URL.
-// You never have to remember to include it manually.
-// ─────────────────────────────────────────────────────────────
 
 apiClient.interceptors.request.use(
   (config) => {
@@ -47,12 +28,6 @@ apiClient.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 )
-
-// ─────────────────────────────────────────────────────────────
-// RESPONSE INTERCEPTOR
-// Runs after EVERY response comes back.
-// Catches common API errors and gives helpful console messages.
-// ─────────────────────────────────────────────────────────────
 
 apiClient.interceptors.response.use(
   (response) => response, // success — just pass it through
